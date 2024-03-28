@@ -1,0 +1,21 @@
+
+创建服务
+sc create WindowMonitorService binpath= "E:\软件\WindowMonitor\WindowMonitorApp\WindowMonitorApp\bin\Debug\net5.0\WindowMonitorApp.exe" displayname= "后台监控服务" start= delayed-auto
+
+添加描述
+sc description WindowMonitorService "后台监控服务,主动采集并系统资源消耗信息"
+
+查询
+sc query WindowMonitorService
+
+修改
+sc config WindowMonitorService start= auto
+
+启动
+sc start WindowMonitorService
+
+停止
+sc stop WindowMonitorService
+
+删除
+sc delete WindowMonitorService
