@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using WindowMoniterApp;
 using WindowMonitorApp.Commons;
@@ -45,8 +46,23 @@ namespace WindowMonitorApp
 
                                                   }));
             services.AddHostedService<WindowMonitorHostservice>();
+            // 注册Swagger
+            services.AddSwaggerGen(u =>
+            {
+                u.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Version = "Ver:1.0.0",//版本
+                    Title = "后台资源监控管理系统",//标题
+                    Description = "后台资源监控管理系统：amamiyasola @20240328",//描述
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                    {
+                        Name = "xxx",
+                        Email = "2222@qq.com"
+                    }
+                });
+            });
+            services.AddControllers();
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -57,17 +73,23 @@ namespace WindowMonitorApp
             var monitorService = app.ApplicationServices.GetService<IMonitorService>();
             monitorService.StartMonitor();
             //app.UseHangfireServer();
+            app.UseSwagger();
+            app.UseSwaggerUI(u =>
+            {
+                u.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI_v1");
+            });
+
+            app.UseHangfireDashboard();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    await context.Response.WriteAsync("Hello World!");
+                //});
             });
-
-            app.UseHangfireDashboard();
         }
     }
 }

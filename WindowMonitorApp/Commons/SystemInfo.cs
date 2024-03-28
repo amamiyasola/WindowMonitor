@@ -96,22 +96,22 @@ namespace WindowMoniterApp.Commons
                 DiskDetailInfo diskDetailInfo = new DiskDetailInfo();
                 diskDetailInfo.DiskInfo = instanceName;
 
-                Console.Write("实例名：{0}", instanceName);
+               // Console.Write("实例名：{0}", instanceName);
                 diskDetailInfo.ReadLoad = Math.Round(GetDiskData(DiskAccessType.Read, instanceName),2);
                 diskDetailInfo.ReadLoadInfo = FormatBytes(diskDetailInfo.ReadLoad) + "/s";
-                s = "\r\n\t硬盘读取速率 (" + FormatBytes(diskDetailInfo.ReadLoad) + "/s)";
-                Console.WriteLine(s);
+                //s = "\r\n\t硬盘读取速率 (" + FormatBytes(diskDetailInfo.ReadLoad) + "/s)";
+                //Console.WriteLine(s);
                 diskDetailInfo.WriteLoad = Math.Round(GetDiskData(DiskAccessType.Write, instanceName), 2);
                 diskDetailInfo.WriteLoadInfo = FormatBytes(diskDetailInfo.WriteLoad) + "/s";
                 //d = GetDiskData(DiskAccessType.Write, instanceName);
-                s = "\t硬盘写入速率 (" + FormatBytes(diskDetailInfo.WriteLoad) + "/s)";
-                Console.WriteLine(s);
+                //s = "\t硬盘写入速率 (" + FormatBytes(diskDetailInfo.WriteLoad) + "/s)";
+                //Console.WriteLine(s);
 
                 diskDetailInfo.DiskLoad = Math.Round(GetDiskData(DiskAccessType.DiskTime, instanceName),2);
                 diskDetailInfo.DiskLoadInfo = diskDetailInfo.DiskLoad.ToString("f4") + " %";
                 //d = GetDiskData(DiskAccessType.DiskTime, instanceName);
-                s = "\t硬盘IO百分比 (" + diskDetailInfo.DiskLoad.ToString("f4") + " %)";
-                Console.WriteLine(s);
+                //s = "\t硬盘IO百分比 (" + diskDetailInfo.DiskLoad.ToString("f4") + " %)";
+                //Console.WriteLine(s);
                 diskDetailInfos.Add(diskDetailInfo);
             }
 
