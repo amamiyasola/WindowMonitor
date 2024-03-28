@@ -46,6 +46,9 @@ namespace WindowMonitorApp.Enititys
 
     }
 
+    /// <summary>
+    /// 磁盘信息
+    /// </summary>
     public class DiskDetailInfo
     {
 
